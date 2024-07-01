@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illustrator Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/sinhala_translator_dashboard.css' %}">
+    <script src="{% static 'dashboard/js/filter.js' %}" defer></script>
+    <script src="{% static 'dashboard/js/play_sound.js' %}" defer></script>
+</head>
+<body>
+    <a href="{% url 'logout' %}?next=/accounts/login/" class="logout">Logout</a>
+    <div class="container">
+        <h1>Illustrator Dashboard</h1>
+        <label for="statusFilter">Filter by status:</label>
+        <select id="statusFilter">
+            <option value="all">All</option>
+            <option value="pending">Pending</option>
+            <option value="complete">Complete</option>
+            <option value="approved">Approved</option>
+            <option value="incomplete">Incomplete</option>
+        </select>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>English Question</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for question in questions %}
+                <tr data-url="{% url 'illustrator_editing_interface' question.id %}">
+                    <td>{{ question.question_id }}</td>
+                    <td>{{ question.english_question }}</td>
+                    <td class="status-{{ question.illustrator_status|lower }}">{{ question.illustrator_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Add the audio element -->
+    <audio id="click-sound" src="{% static 'dashboard/sounds/click-question.mp3' %}" preload="auto"></audio>
+</body>
+</html>

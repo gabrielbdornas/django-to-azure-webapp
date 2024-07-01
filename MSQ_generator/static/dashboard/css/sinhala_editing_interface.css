@@ -1,0 +1,141 @@
+/* Sinhala Editing Interface Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    
+}
+
+.container {
+    width: 90%; /* Adjusted to take more width of the screen */
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    padding-left: 20px; /* Ensure equal padding on all sides */
+    padding-right: 20px; /* Ensure equal padding on all sides */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.logout:hover {
+    color: #007bff;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.column {
+    flex: 0 0 48%;
+    margin-left: -18px; 
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    padding: 0 15px; /* Add padding to both sides */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: bold;
+}
+
+.form-group textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    height: 150px; /* Increased height for better visibility */
+    resize: vertical; /* Allow vertical resize */
+}
+
+/* Alternating background colors for textareas */
+.form-group:nth-child(odd) textarea {
+    background-color: #f9f9f9; /* Slightly dimmer for odd rows */
+}
+
+.form-group:nth-child(even) textarea {
+    background-color: #ffffff; /* White for even rows */
+}
+
+/* Hover effect */
+.form-group:hover textarea {
+    background-color: #e0e0e0; /* Dimmer on hover */
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px; /* Adjust margin for spacing */
+}
+
+.button-container button, .button-container .button {
+    padding: 0.3rem 0.6rem; /* Smaller padding for smaller buttons */
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px; /* Add margin to the right for spacing between buttons */
+}
+
+.button-container button:hover, .button-container .button:hover {
+    color: white; /* Change font color to white on hover */
+}
+
+.button-container .back-button {
+    background-color: #fff; /* White background for the back button */
+    color: #dc3545; /* Red text for the back button */
+    text-decoration: none; /* Remove underline */
+}
+
+.button-container .back-button:hover {
+    background-color: #dc3545; /* Red background on hover */
+    color: white; /* White text on hover */
+}
+
+.button-container .complete-button:disabled {
+    background-color: #ccc; /* Gray background when disabled */
+    cursor: not-allowed; /* Disabled cursor */
+}
+
+.button-container .complete-button:disabled:hover {
+    background-color: #ccc; /* No color change on hover when disabled */
+}
+
+.message {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+

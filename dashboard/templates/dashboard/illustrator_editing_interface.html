@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illustrator Editing Interface</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/sinhala_editing_interface.css' %}">
+    <style>
+        .form-group input[type="file"], .form-group .image-preview, .form-group .image-placeholder {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            height: 150px; /* Set the height to match the textareas */
+            box-sizing: border-box; /* Ensure padding and border are included in the width and height */
+            background-color: #f9f9f9;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: bold;
+        }
+        .form-group .image-preview, .form-group .image-placeholder {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%; /* Ensure the preview area matches the input height */
+        }
+        .form-group .image-preview img {
+            max-width: 80%;
+            max-height: 100%;
+        }
+        .form-group .image-preview button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .form-group .image-preview button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+    <div class="container">
+        <h1></h1>
+        {% if messages %}
+        <div id="message-container" class="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        <form id="editingForm" action="{% url 'illustrator_editing_interface' question.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="column">
+                    <div class="form-group">
+                        <label for="english_question">English Question</label>
+                        <textarea id="english_question" readonly>{{ question.english_question }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="english_answer1">English Answer 1</label>
+                        <textarea id="english_answer1" readonly>{{ question.english_answer1 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="english_answer2">English Answer 2</label>
+                        <textarea id="english_answer2" readonly>{{ question.english_answer2 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="english_answer3">English Answer 3</label>
+                        <textarea id="english_answer3" readonly>{{ question.english_answer3 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="v_image_steps">V Image Steps</label>
+                        <textarea id="v_image_steps" readonly>{{ question.v_image_steps }}</textarea>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="form-group">
+                        <label for="question_image_illustration">Upload Question Image Illustration</label>
+                        {% if question.question_image_illustration %}
+                        <div class="image-preview">
+                            <img src="{{ question.question_image_illustration.url }}" alt="Question Image Illustration">
+                            <button type="button" class="delete-image" data-field="question_image_illustration">Delete</button>
+                        </div>
+                        {% else %}
+                        <input type="file" id="question_image_illustration" name="question_image_illustration">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="answer1_image_illustration">Upload Answer 1 Image Illustration</label>
+                        {% if question.answer1_image_illustration %}
+                        <div class="image-preview">
+                            <img src="{{ question.answer1_image_illustration.url }}" alt="Answer 1 Image Illustration">
+                            <button type="button" class="delete-image" data-field="answer1_image_illustration">Delete</button>
+                        </div>
+                        {% else %}
+                        <input type="file" id="answer1_image_illustration" name="answer1_image_illustration">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="answer2_image_illustration">Upload Answer 2 Image Illustration</label>
+                        {% if question.answer2_image_illustration %}
+                        <div class="image-preview">
+                            <img src="{{ question.answer2_image_illustration.url }}" alt="Answer 2 Image Illustration">
+                            <button type="button" class="delete-image" data-field="answer2_image_illustration">Delete</button>
+                        </div>
+                        {% else %}
+                        <input type="file" id="answer2_image_illustration" name="answer2_image_illustration">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="answer3_image_illustration">Upload Answer 3 Image Illustration</label>
+                        {% if question.answer3_image_illustration %}
+                        <div class="image-preview">
+                            <img src="{{ question.answer3_image_illustration.url }}" alt="Answer 3 Image Illustration">
+                            <button type="button" class="delete-image" data-field="answer3_image_illustration">Delete</button>
+                        </div>
+                        {% else %}
+                        <input type="file" id="answer3_image_illustration" name="answer3_image_illustration">
+                        {% endif %}
+                    </div>
+                    <div class="form-group">
+                        <label for="visual_instructions_illustration">Upload Visual Instructions Illustration</label>
+                        {% if question.visual_instructions_illustration %}
+                        <div class="image-preview">
+                            <img src="{{ question.visual_instructions_illustration.url }}" alt="Visual Instructions Illustration">
+                            <button type="button" class="delete-image" data-field="visual_instructions_illustration">Delete</button>
+                        </div>
+                        {% else %}
+                        <input type="file" id="visual_instructions_illustration" name="visual_instructions_illustration">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="status" id="status" value="pending">
+            <div class="button-container">
+                <button type="submit" name="action" value="save" class="button">Save</button>
+                <button type="submit" name="action" value="complete" id="completeButton" class="button complete-button" disabled>Complete</button>
+                <a href="{% url 'illustrator_dashboard' %}" class="button back-button">Back to Dashboard</a>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'dashboard/js/validate_form.js' %}"></script>
+    <script src="{% static 'dashboard/js/hide_message.js' %}" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const completeButton = document.getElementById("completeButton");
+            const fileInputs = document.querySelectorAll("input[type='file']");
+            const deleteButtons = document.querySelectorAll(".delete-image");
+
+            function validateFiles() {
+                let allFilled = true;
+                fileInputs.forEach(input => {
+                    if (!input.files.length && !input.closest('.form-group').querySelector('.image-preview img')) {
+                        allFilled = false;
+                    }
+                });
+                completeButton.disabled = !allFilled;
+            }
+
+            function handleFileUpload(input) {
+                const formGroup = input.closest('.form-group');
+                const file = input.files[0];
+
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const existingPreview = formGroup.querySelector('.image-preview');
+                        if (existingPreview) {
+                            existingPreview.querySelector('img').src = e.target.result;
+                        } else {
+                            const preview = document.createElement('div');
+                            preview.classList.add('image-preview');
+
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.alt = 'Uploaded Image';
+
+                            const deleteButton = document.createElement('button');
+                            deleteButton.type = 'button';
+                            deleteButton.classList.add('delete-image');
+                            deleteButton.dataset.field = input.name;
+                            deleteButton.innerText = 'Delete';
+
+                            preview.appendChild(img);
+                            preview.appendChild(deleteButton);
+
+                            input.style.display = 'none'; // Hide the input field
+                            formGroup.appendChild(preview);
+
+                            deleteButton.addEventListener('click', function() {
+                                handleDeleteImage(deleteButton);
+                            });
+                        }
+                        validateFiles();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+            function handleDeleteImage(button) {
+                const field = button.dataset.field;
+                fetch("{% url 'delete_image' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ question_id: "{{ question.id }}", field: field })
+                }).then(response => {
+                    if (response.ok) {
+                        const formGroup = button.closest('.form-group');
+                        button.closest('.image-preview').remove();
+
+                        const inputField = document.createElement('input');
+                        inputField.type = 'file';
+                        inputField.id = field;
+                        inputField.name = field;
+                        inputField.style.display = 'block'; // Show the input field again
+
+                        formGroup.appendChild(inputField);
+
+                        inputField.addEventListener('change', function() {
+                            handleFileUpload(inputField);
+                        });
+
+                        validateFiles(); // Revalidate the form
+                    }
+                });
+            }
+
+            fileInputs.forEach(input => {
+                input.addEventListener('change', function() {
+                    handleFileUpload(input);
+                });
+            });
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    handleDeleteImage(button);
+                });
+            });
+
+            validateFiles(); // Initial check
+        });
+    </script>
+</body>
+</html>

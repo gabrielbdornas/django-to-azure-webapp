@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinhala Editing Interface</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'dashboard/css/sinhala_editing_interface.css' %}">
+</head>
+<body>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+    <div class="container">
+        <h1></h1>
+        {% if messages %}
+        <div id="message-container" class="messages">
+
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <form id="editingForm" action="{% url 'sinhala_editing_interface' question.id %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="column">
+                    <div class="form-group">
+                        <label for="english_question">English Question</label>
+                        <textarea id="english_question" readonly>{{ question.english_question }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="english_answer1">English Answer 1</label>
+                        <textarea id="english_answer1" readonly>{{ question.english_answer1 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="english_answer2">English Answer 2</label>
+                        <textarea id="english_answer2" readonly>{{ question.english_answer2 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="english_answer3">English Answer 3</label>
+                        <textarea id="english_answer3" readonly>{{ question.english_answer3 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="v_text">English V Text</label>
+                        <textarea id="v_text" readonly>{{ question.v_text }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="a_text">English A Text</label>
+                        <textarea id="a_text" readonly>{{ question.a_text }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="k_text">English K Text</label>
+                        <textarea id="k_text" readonly>{{ question.k_text }}</textarea>
+                    </div>
+                </div>
+                <div class="column">
+                    <div class="form-group">
+                        <label for="sinhala_question">Sinhala Question</label>
+                        <textarea id="sinhala_question" name="sinhala_question">{{ question.sinhala_question }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinhala_answer1">Sinhala Answer 1</label>
+                        <textarea id="sinhala_answer1" name="sinhala_answer1">{{ question.sinhala_answer1 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinhala_answer2">Sinhala Answer 2</label>
+                        <textarea id="sinhala_answer2" name="sinhala_answer2">{{ question.sinhala_answer2 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinhala_answer3">Sinhala Answer 3</label>
+                        <textarea id="sinhala_answer3" name="sinhala_answer3">{{ question.sinhala_answer3 }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinhala_v_text">Sinhala V Text</label>
+                        <textarea id="sinhala_v_text" name="sinhala_v_text">{{ question.sinhala_v_text }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinhala_a_text">Sinhala A Text</label>
+                        <textarea id="sinhala_a_text" name="sinhala_a_text">{{ question.sinhala_a_text }}</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sinhala_k_text">Sinhala K Text</label>
+                        <textarea id="sinhala_k_text" name="sinhala_k_text">{{ question.sinhala_k_text }}</textarea>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="status" id="status" value="pending">
+            <div class="button-container">
+                <button type="submit" name="action" value="save" class="button">Save</button>
+                <button type="submit" name="action" value="complete" id="completeButton" class="button complete-button" disabled>Complete</button>
+                <a href="{% url 'sinhala_translator_dashboard' %}" class="button back-button">Back to Dashboard</a>
+            </div>
+        </form>
+    </div>
+    <script src="{% static 'dashboard/js/validate_form.js' %}"></script>
+    <script src="{% static 'dashboard/js/hide_message.js' %}" defer></script>
+
+</body>
+</html>

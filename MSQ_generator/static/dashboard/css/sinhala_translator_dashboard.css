@@ -1,0 +1,136 @@
+/* Sinhala Translator Dashboard Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    cursor: url(http://www.rw-designer.com/cursor-extern.php?id=1544), auto !important;
+}
+
+
+.container {
+    width: 90%; /* Adjusted to take more width of the screen */
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.logout {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+.logout:hover {
+    color: #007bff;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%; /* Ensure table takes full width */
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 16px; /* Increased padding for better spacing */
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top; /* Ensure text starts at the top */
+    word-wrap: break-word; /* Ensure long words break to the next line */
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* Creamy and Glossy Status Colors with Increased Contrast */
+.status-pending {
+    background: linear-gradient(to bottom, #ffd1b3, #ffb380);
+    color: #663300;
+}
+
+.status-complete {
+    background: linear-gradient(to bottom, #fffacd, #ffde85);
+    color: #665500;
+}
+
+.status-approved {
+    background: linear-gradient(to bottom, #ccffcc, #80ff80);
+    color: #003300;
+}
+
+.status-incomplete {
+    background: linear-gradient(to bottom, #ff9999, #ff6666);
+    color: #660000;
+}
+
+tr:hover .status-pending {
+    background: linear-gradient(to bottom, #ffb380, #ff8c33); /* Dimmer shade of creamy orange */
+}
+
+tr:hover .status-complete {
+    background: linear-gradient(to bottom, #ffde85, #ffcc33); /* Dimmer shade of creamy yellow */
+}
+
+tr:hover .status-approved {
+    background: linear-gradient(to bottom, #80ff80, #4dff4d); /* Dimmer shade of creamy green */
+}
+
+tr:hover .status-incomplete {
+    background: linear-gradient(to bottom, #ff6666, #ff3333); /* Dimmer shade of creamy red */
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+th, td {
+    padding: 16px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+    word-wrap: break-word;
+    min-width: 200px; /* Ensures each column has a minimum width */
+}
+
+th:nth-child(1), td:nth-child(1) { /* Adjust the width of the first column (ID) */
+    min-width: 100px;
+}
+
+th:nth-child(2), td:nth-child(2) { /* Adjust the width of the second column (English Question) */
+    min-width: 400px;
+}
+
+th:nth-child(3), td:nth-child(3) { /* Adjust the width of the third column (Status) */
+    min-width: 150px;
+}
+
+/* Alternating row colors */
+tbody tr:nth-child(odd) {
+    background-color: #ffffff; /* White */
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Slightly dimmer */
+}
+
+/* Hover effect */
+tbody tr:hover {
+    background-color: #e0e0e0; /* Dimmer on hover */
+}
+
+
