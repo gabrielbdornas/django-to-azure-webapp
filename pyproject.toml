@@ -1,0 +1,2 @@
+[tool.taskipy.tasks]
+server = { cmd = "python -m gunicorn MSQ_generator.asgi:application -k uvicorn.workers.UvicornWorker", help = "Runs server" }
